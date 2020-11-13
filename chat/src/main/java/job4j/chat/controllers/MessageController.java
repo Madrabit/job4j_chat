@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -33,10 +34,10 @@ public class MessageController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Message> findById(@PathVariable int id) {
-        var Message = this.messages.findById(id);
+        Optional<Message> message = this.messages.findById(id);
         return new ResponseEntity<Message>(
-                Message.orElse(new Message()),
-                Message.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND
+                message.orElse(new Message()),
+                message.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND
         );
     }
 

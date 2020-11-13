@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -33,10 +34,10 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Person> findById(@PathVariable int id) {
-        var Person = this.persons.findById(id);
+        Optional<Person> person = this.persons.findById(id);
         return new ResponseEntity<Person>(
-                Person.orElse(new Person()),
-                Person.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND
+                person.orElse(new Person()),
+                person.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND
         );
     }
 

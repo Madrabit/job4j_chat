@@ -13,7 +13,8 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String nickName;
+    private String username;
+    private String password;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Role role;
@@ -32,12 +33,12 @@ public class Person {
         this.id = id;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Role getRole() {
@@ -54,5 +55,13 @@ public class Person {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

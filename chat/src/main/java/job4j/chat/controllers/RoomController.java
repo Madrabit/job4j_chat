@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -33,7 +34,7 @@ public class RoomController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Room> findById(@PathVariable int id) {
-        var room = this.rooms.findById(id);
+        Optional<Room> room = this.rooms.findById(id);
         return new ResponseEntity<Room>(
                 room.orElse(new Room()),
                 room.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND
